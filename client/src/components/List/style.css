@@ -18,6 +18,7 @@
 
 .list-overflow-container li * {
   cursor: pointer;
+  overflow: hidden;
 }
 
 .list-overflow-container li a {
