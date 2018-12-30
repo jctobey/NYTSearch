@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.css";
-import { PromiseProvider } from "mongoose";
 
 // This file exports both the List and ListItem components
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Input, FormBtn, SaveBtn } from "../Form";
-import { Col, Row } from "../Grid";
+import { Col, Row, Container } from "../Grid";
 import Jumbotron from "../Jumbotron";
 import { List, ListItem } from "../List";
 import API from "../../utils/API";
@@ -33,7 +33,7 @@ class Search extends Component {
       image: this.state.result[id].volumeInfo.imageLinks.thumbnail,
       link: this.state.result[id].volumeInfo.infoLink
     })
-      .then(res => alert(`${res.data.title} Has Been Saved to Your Book List.`))
+      .then(res => alert(`${res.data.title} has been saved to your book list.`))
       .catch(err => console.log(err));
     event.target.hidden = true;
   };
@@ -42,73 +42,74 @@ class Search extends Component {
     return (
       <div>
         <form>
-          <Jumbotron>
-            <h1>(React) Google Books Search</h1>
-          </Jumbotron>
-          <Input
-            name="search"
-            value={this.state.search}
-            placeholder="Title (required)"
-            onChange={this.handleInputChange}
-          />
-          <FormBtn disabled={!this.state.search} onClick={this.apiSearch}>
-            Search Books
-          </FormBtn>
-          <Row>
-            <Col size="md-6" />
-            <Col size="md-12 md-12">
-              {this.state.result.length ? (
-                <List>
-                  {this.state.result.map((book, index) => {
-                    return (
-                      <ListItem key={book.id}>
-                        <a>
-                          {/* <a href={"/books/" + book.id}> */}
-                          <h3 name="title">
-                            <a
-                              href={book.volumeInfo.infoLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {book.volumeInfo.title}
-                            </a>
-                          </h3>
-                          <h6>{book.volumeInfo.subtitle}</h6>
-                          <h5 name="authors">
-                            Written by {book.volumeInfo.authors[0]}
-                          </h5>
-                          <br />
-                          <div className="card">
-                            <div className="img-container">
-                              <img
-                                name="link"
-                                value={this.state.link}
-                                alt={book.volumeInfo.title}
-                                src={book.volumeInfo.imageLinks.thumbnail}
-                                name="image"
-                              />
+          <Container fluid>
+            <Jumbotron>
+              <h1>(React) Google Books Search</h1>
+            </Jumbotron>
+            <Input
+              name="search"
+              value={this.state.search}
+              placeholder="Title (required)"
+              onChange={this.handleInputChange}
+            />
+            <FormBtn disabled={!this.state.search} onClick={this.apiSearch}>
+              Search Books
+            </FormBtn>
+            <Row>
+              <Col size="md-6" />
+              <Col size="md-12 md-12">
+                {this.state.result.length ? (
+                  <List>
+                    {this.state.result.map((book, index) => {
+                      return (
+                        <ListItem key={book.id}>
+                          <a>
+                            <h3 name="title">
+                              <a
+                                href={book.volumeInfo.infoLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {book.volumeInfo.title}
+                              </a>
+                            </h3>
+                            <h6>{book.volumeInfo.subtitle}</h6>
+                            <h5 name="authors">
+                              Written by {book.volumeInfo.authors[0]}
+                            </h5>
+                            <br />
+                            <div className="card">
+                              <div className="img-container">
+                                <img
+                                  name="link"
+                                  value={this.state.link}
+                                  alt={book.volumeInfo.title}
+                                  src={book.volumeInfo.imageLinks.thumbnail}
+                                  name="image"
+                                />
+                              </div>
                             </div>
-                          </div>
-                          <p name="description">
-                            {book.volumeInfo.description}
-                          </p>
-                          <SaveBtn
-                            id={index}
-                            onClick={this.handleFormSubmit}
-                            hidden={false}
-                          >
-                            Save This Book
-                          </SaveBtn>
-                        </a>
-                      </ListItem>
-                    );
-                  })}
-                </List>
-              ) : (
-                <h3>No Results to Display</h3>
-              )}
-            </Col>
-          </Row>
+                            <p name="description">
+                              {book.volumeInfo.description}
+                            </p>
+                            <SaveBtn
+                              id={index}
+                              onClick={this.handleFormSubmit}
+                              hidden={false}
+                            >
+                              Save This Book
+                            </SaveBtn>
+                          </a>
+                        </ListItem>
+                      );
+                    })}
+                  </List>
+                ) : (
+                  <h3>No Results to Display</h3>
+                )}
+              </Col>
+            </Row>
+          </Container>
         </form>
       </div>
     );

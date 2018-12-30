@@ -1,8 +1,9 @@
-.delete-btn {
+.view-btn {
   float: right;
-  color: red;
-  font-size: 14pt;
+  margin-right: 75px;
   margin-top: -35px;
+  color: green;
+  font-size: 14pt;
 }
 .list-overflow-container {
   max-height: 545px;
